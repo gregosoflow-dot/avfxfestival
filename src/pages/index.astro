@@ -1580,14 +1580,25 @@
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
     // Newsletter submit
-    function handleNewsletterSubmit(e) {
+    async function handleNewsletterSubmit(e) {
       e.preventDefault();
       const form = e.target;
       const btn = form.querySelector('button');
-      const email = form.querySelector('input[type="email"]').value;
+      const emailInput = form.querySelector('input[type="email"]');
+      const emailValue = emailInput.value;
+      btn.textContent = '...';
+      btn.disabled = true;
+      try {
+        await fetch('https://n8n.srv1492683.hstgr.cloud/webhook/newsletter-avfx', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({email: emailValue, data: new Date().toISOString(), fonte: 'sito-avfx'})
+        });
+      } catch (_) {}
       btn.textContent = '✓ Iscritto!';
       btn.style.background = '#10B981';
-      form.querySelector('input').value = '';
+      btn.disabled = false;
+      emailInput.value = '';
       setTimeout(() => {
         btn.textContent = 'Iscriviti';
         btn.style.background = '';
