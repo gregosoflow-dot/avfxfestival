@@ -1,63 +1,1615 @@
 ---
-// AVFX Festival - Coming Soon
+// AVFX Festival 2026 - Sito completo
+// Ricostruito da Kit 🏗️ — WebDev Agent
 ---
+<!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AVFX Festival</title>
-  <meta name="description" content="AVFX Festival - Visual Effects, AI & Virtual Production" />
+  <title>AVFX Festival 2026 — Festival degli Effetti Visivi e dell'Animazione CGI</title>
+  <meta name="description" content="AVFX Festival 2026 — Festival degli Effetti Visivi e dell'Animazione CGI. 18 Aprile 2026, Nuovo Cinema Aquila, Roma. Ingresso gratuito." />
+  <meta name="theme-color" content="#0a0a1a" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="AVFX Festival 2026" />
+  <meta property="og:description" content="18 Aprile 2026 · Roma · VFX · Virtual Production · Animation · AI" />
+  <meta property="og:type" content="website" />
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet" />
+
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* ============================================
+       RESET & BASE
+    ============================================ */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-dark: #0a0a1a;
+      --bg-section: #0f0f2a;
+      --bg-light: #ffffff;
+      --accent-purple: #6B21A8;
+      --accent-purple-light: #7C3AED;
+      --accent-magenta: #D946EF;
+      --accent-cyan: #06B6D4;
+      --text-white: #ffffff;
+      --text-light: #e2e8f0;
+      --text-gray: #94a3b8;
+      --text-dark: #1a1a2e;
+      --badge-red: #EF4444;
+      --badge-green: #10B981;
+      --badge-purple: #7C3AED;
+      --badge-cyan: #06B6D4;
+      --radius-card: 14px;
+      --font: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: 'Inter', system-ui, sans-serif;
-      background: #0a0a0a;
-      color: #fff;
+      font-family: var(--font);
+      background: var(--bg-dark);
+      color: var(--text-white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: var(--font); cursor: pointer; }
+
+    /* ============================================
+       SCROLL ANIMATION — FADE IN
+    ============================================ */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-in-delay-1 { transition-delay: 0.1s; }
+    .fade-in-delay-2 { transition-delay: 0.2s; }
+    .fade-in-delay-3 { transition-delay: 0.3s; }
+
+    /* ============================================
+       NAVIGATION
+    ============================================ */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(10, 10, 26, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(107, 33, 168, 0.3);
+      padding: 0 1.5rem;
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 900;
+      font-size: 1.3rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .nav-logo-badge {
+      background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
+      color: white;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .nav-logo-text {
+      color: var(--text-white);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      opacity: 0.7;
+      display: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--text-light);
+      opacity: 0.8;
+      transition: opacity 0.2s, color 0.2s;
+    }
+
+    .nav-links a:hover {
+      opacity: 1;
+      color: var(--accent-magenta);
+    }
+
+    .nav-cta {
+      background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
+      color: white !important;
+      opacity: 1 !important;
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      font-weight: 700 !important;
+      transition: transform 0.2s, box-shadow 0.2s !important;
+    }
+
+    .nav-cta:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(217, 70, 239, 0.5);
+    }
+
+    /* Mobile nav */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: white;
+      border-radius: 2px;
+      transition: transform 0.3s;
+    }
+
+    /* ============================================
+       HERO
+    ============================================ */
+    .hero {
+      position: relative;
       min-height: 100vh;
       display: flex;
       align-items: center;
-      justify-content: center;
+      overflow: hidden;
+      padding: 100px 1.5rem 60px;
+      background: var(--bg-dark);
+    }
+
+    /* Gradient background nebula effect */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 50%, rgba(107, 33, 168, 0.45) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 30%, rgba(217, 70, 239, 0.25) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 40% at 60% 80%, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse 40% 30% at 90% 70%, rgba(107, 33, 168, 0.3) 0%, transparent 50%);
+      z-index: 0;
+    }
+
+    /* Light streaks */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(105deg, transparent 20%, rgba(217, 70, 239, 0.07) 30%, transparent 40%),
+        linear-gradient(108deg, transparent 35%, rgba(107, 33, 168, 0.1) 45%, transparent 55%),
+        linear-gradient(102deg, transparent 50%, rgba(6, 182, 212, 0.06) 60%, transparent 70%),
+        linear-gradient(112deg, transparent 10%, rgba(217, 70, 239, 0.05) 25%, transparent 35%);
+      z-index: 0;
+    }
+
+    /* Grid overlay for tech feel */
+    .hero-grid-overlay {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(107, 33, 168, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(107, 33, 168, 0.08) 1px, transparent 1px);
+      background-size: 60px 60px;
+      z-index: 0;
+      mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 20%, transparent 80%);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero-content {
       text-align: center;
     }
-    .container {
-      max-width: 600px;
-      padding: 2rem;
+
+    .hero-event-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(107, 33, 168, 0.3);
+      border: 1px solid rgba(217, 70, 239, 0.4);
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--accent-magenta);
+      margin-bottom: 1.5rem;
     }
-    h1 {
-      font-size: 3.5rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #ff6b35, #f7c948, #ff6b35);
+
+    .hero-event-badge .dot {
+      width: 7px;
+      height: 7px;
+      background: var(--accent-magenta);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.4); }
+    }
+
+    .hero-title {
+      font-size: clamp(3rem, 10vw, 7rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      line-height: 0.95;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #ffffff 0%, #e2d9f3 40%, var(--accent-magenta) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(0.75rem, 2vw, 1rem);
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+      margin-bottom: 1.2rem;
+      opacity: 0.9;
+    }
+
+    .hero-tagline {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      font-weight: 400;
+      color: var(--text-light);
+      margin-bottom: 0.6rem;
+      font-style: italic;
+      opacity: 0.85;
+    }
+
+    .hero-desc {
+      font-size: 0.95rem;
+      color: var(--text-gray);
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    .hero-meta-item svg {
+      opacity: 0.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
+      color: white;
+      padding: 0.9rem 2.2rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-primary:hover {
+      transform: scale(1.05) translateY(-2px);
+      box-shadow: 0 8px 30px rgba(217, 70, 239, 0.5);
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: white;
+      padding: 0.9rem 2.2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .btn-outline:hover {
+      border-color: white;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    /* Floating orbs decoration */
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+
+    .hero-orb-1 {
+      width: 400px;
+      height: 400px;
+      background: rgba(107, 33, 168, 0.25);
+      top: -10%;
+      right: -5%;
+    }
+
+    .hero-orb-2 {
+      width: 300px;
+      height: 300px;
+      background: rgba(217, 70, 239, 0.2);
+      bottom: 10%;
+      left: -5%;
+    }
+
+    .hero-orb-3 {
+      width: 200px;
+      height: 200px;
+      background: rgba(6, 182, 212, 0.15);
+      top: 40%;
+      right: 20%;
+    }
+
+    /* ============================================
+       SECTION SHARED STYLES
+    ============================================ */
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1.05;
       margin-bottom: 1rem;
     }
-    .subtitle {
-      font-size: 1.2rem;
-      color: #888;
-      margin-bottom: 2rem;
-      line-height: 1.6;
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      opacity: 0.7;
+      max-width: 500px;
     }
-    .badge {
-      display: inline-block;
-      padding: 0.5rem 1.5rem;
-      border: 1px solid #333;
+
+    /* ============================================
+       ABOUT — 3 COLONNE
+    ============================================ */
+    .about {
+      background: #ffffff;
+      color: var(--text-dark);
+      padding: 80px 1.5rem;
+    }
+
+    .about-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .about-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .about-header .section-label {
+      color: var(--accent-purple);
+    }
+
+    .about-header .section-title {
+      color: var(--text-dark);
+    }
+
+    .about-header .section-subtitle {
+      color: #555;
+      margin: 0 auto;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .about-card {
+      background: #f8f6ff;
+      border-radius: var(--radius-card);
+      padding: 2.5rem 2rem;
+      border: 1px solid rgba(107, 33, 168, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .about-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(107, 33, 168, 0.15);
+    }
+
+    .about-card-icon {
+      width: 52px;
+      height: 52px;
+      background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.2rem;
+    }
+
+    .about-card-icon svg {
+      width: 26px;
+      height: 26px;
+      color: white;
+    }
+
+    .about-card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 0.75rem;
+    }
+
+    .about-card p {
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    /* ============================================
+       FEATURED SPEAKERS
+    ============================================ */
+    .speakers {
+      background: var(--bg-dark);
+      padding: 80px 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .speakers::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 0% 50%, rgba(107, 33, 168, 0.2) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 30% at 100% 50%, rgba(217, 70, 239, 0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .speakers-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .speakers-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .speakers-header .section-label {
+      color: var(--accent-magenta);
+    }
+
+    .speakers-header .section-title {
+      color: var(--text-white);
+    }
+
+    .speakers-header .section-subtitle {
+      color: var(--text-gray);
+      margin: 0 auto;
+    }
+
+    .speakers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.25rem;
+    }
+
+    /* Speaker card */
+    .speaker-card {
+      background: linear-gradient(145deg, #12122a, #1a1040);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      border: 1px solid rgba(107, 33, 168, 0.3);
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+      position: relative;
+    }
+
+    .speaker-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 50px rgba(107, 33, 168, 0.4);
+      border-color: rgba(217, 70, 239, 0.5);
+    }
+
+    /* Card glow on hover */
+    .speaker-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(217, 70, 239, 0.05), transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+
+    .speaker-card:hover::before {
+      opacity: 1;
+    }
+
+    .speaker-photo-wrap {
+      position: relative;
+      aspect-ratio: 1;
+      overflow: hidden;
+    }
+
+    .speaker-photo-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #1e1040 0%, #2d1b69 50%, #1e1040 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      font-weight: 900;
+      color: rgba(255, 255, 255, 0.2);
+      letter-spacing: -2px;
+    }
+
+    .speaker-photo-placeholder .initials {
+      background: linear-gradient(135deg, rgba(217, 70, 239, 0.5), rgba(107, 33, 168, 0.5));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: 2.5rem;
+    }
+
+    .speaker-location-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 0.25rem 0.65rem;
+      border-radius: 20px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: white;
+      z-index: 2;
+    }
+
+    .badge-red    { background: var(--badge-red); }
+    .badge-green  { background: var(--badge-green); }
+    .badge-purple { background: var(--badge-purple); }
+    .badge-cyan   { background: var(--badge-cyan); }
+
+    .speaker-info {
+      padding: 1rem;
+    }
+
+    .speaker-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-white);
+      margin-bottom: 0.25rem;
+      line-height: 1.2;
+    }
+
+    .speaker-role {
+      font-size: 0.75rem;
+      color: var(--accent-magenta);
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+      line-height: 1.3;
+    }
+
+    .speaker-company {
+      font-size: 0.72rem;
+      color: var(--text-gray);
+      line-height: 1.3;
+    }
+
+    .speaker-credits {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-top: 0.6rem;
+    }
+
+    .speaker-credit-tag {
+      background: rgba(107, 33, 168, 0.25);
+      border: 1px solid rgba(107, 33, 168, 0.4);
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.62rem;
+      color: var(--text-light);
+      font-weight: 600;
+    }
+
+    .speaker-award {
+      background: rgba(245, 158, 11, 0.2);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: #fbbf24;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.62rem;
+      font-weight: 700;
+    }
+
+    .speaker-event-tag {
+      display: block;
+      margin-top: 0.75rem;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--text-gray);
+      opacity: 0.7;
+    }
+
+    /* ============================================
+       NEWSLETTER
+    ============================================ */
+    .newsletter {
+      background: var(--bg-light);
+      padding: 80px 1.5rem;
+    }
+
+    .newsletter-inner {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .newsletter .section-label {
+      color: var(--accent-purple);
+    }
+
+    .newsletter h2 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 900;
+      color: var(--text-dark);
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .newsletter p {
+      color: #555;
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 0.75rem;
+      max-width: 480px;
+      margin: 0 auto;
+      flex-direction: column;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      padding: 0.9rem 1.3rem;
+      border: 2px solid rgba(107, 33, 168, 0.25);
       border-radius: 50px;
-      color: #ff6b35;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
+      font-family: var(--font);
+      background: #f8f6ff;
+      color: var(--text-dark);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .newsletter-form input:focus {
+      border-color: var(--accent-purple);
+    }
+
+    .newsletter-form input::placeholder {
+      color: #aaa;
+    }
+
+    .newsletter-form button {
+      background: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta));
+      color: white;
+      padding: 0.9rem 2rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      white-space: nowrap;
+    }
+
+    .newsletter-form button:hover {
+      transform: scale(1.04);
+      box-shadow: 0 6px 24px rgba(217, 70, 239, 0.45);
+    }
+
+    .newsletter-note {
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      color: #999;
+    }
+
+    /* ============================================
+       FOOTER
+    ============================================ */
+    .footer {
+      background: #0a0a14;
+      color: var(--text-white);
+      padding: 60px 1.5rem 30px;
+      border-top: 1px solid rgba(107, 33, 168, 0.25);
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-logo {
+      font-size: 1.8rem;
+      font-weight: 900;
       letter-spacing: 2px;
       text-transform: uppercase;
+      background: linear-gradient(135deg, white, var(--accent-magenta));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-tagline {
+      font-size: 0.85rem;
+      color: var(--text-gray);
+      margin-bottom: 1.2rem;
+      line-height: 1.6;
+      max-width: 300px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .footer-social a {
+      width: 40px;
+      height: 40px;
+      background: rgba(107, 33, 168, 0.2);
+      border: 1px solid rgba(107, 33, 168, 0.4);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    }
+
+    .footer-social a:hover {
+      background: rgba(217, 70, 239, 0.25);
+      border-color: var(--accent-magenta);
+      transform: translateY(-2px);
+    }
+
+    .footer-social svg {
+      width: 18px;
+      height: 18px;
+      fill: white;
+    }
+
+    .footer-col h4 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent-magenta);
+      margin-bottom: 1rem;
+    }
+
+    .footer-col p,
+    .footer-col a {
+      font-size: 0.88rem;
+      color: var(--text-gray);
+      line-height: 1.8;
+      display: block;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover {
+      color: var(--text-white);
+    }
+
+    .footer-bottom {
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-bottom p {
+      font-size: 0.8rem;
+      color: var(--text-gray);
+    }
+
+    .footer-bottom .footer-credits {
+      font-size: 0.8rem;
+      color: rgba(107, 33, 168, 0.6);
+    }
+
+    /* ============================================
+       RESPONSIVE — TABLET (640px+)
+    ============================================ */
+    @media (min-width: 640px) {
+      .about-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .newsletter-form {
+        flex-direction: row;
+      }
+
+      .footer-top {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav-logo-text {
+        display: inline;
+      }
+    }
+
+    /* ============================================
+       RESPONSIVE — DESKTOP (1024px+)
+    ============================================ */
+    @media (min-width: 1024px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-content {
+        text-align: center;
+      }
+
+      .about-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .footer-top {
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+      }
+
+      /* Show nav links on desktop */
+      .nav-links {
+        display: flex;
+      }
+
+      .nav-hamburger {
+        display: none;
+      }
+    }
+
+    /* Hide nav links on mobile */
+    @media (max-width: 1023px) {
+      .nav-links {
+        display: none;
+      }
+
+      .nav-hamburger {
+        display: flex;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>AVFX Festival</h1>
-    <p class="subtitle">
-      Visual Effects · AI · Virtual Production<br/>
-      Il festival dove tecnologia e creatività si incontrano.
-    </p>
-    <span class="badge">Coming Soon</span>
-  </div>
+
+  <!-- ================================================
+       NAVIGATION
+  ================================================ -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <span class="nav-logo-badge">AVFX</span>
+        <span class="nav-logo-text">Festival</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#about">Il Festival</a></li>
+        <li><a href="#speakers">Speaker</a></li>
+        <li><a href="#newsletter">Newsletter</a></li>
+        <li><a href="#contatti">Contatti</a></li>
+        <li>
+          <a
+            href="https://www.avfx.it/dettagli-e-registrazioni/festival-degli-effetti-visivi-e-dellanimazione-cgi"
+            target="_blank"
+            rel="noopener"
+            class="nav-cta"
+          >
+            Registrati
+          </a>
+        </li>
+      </ul>
+      <button class="nav-hamburger" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ================================================
+       HERO
+  ================================================ -->
+  <section class="hero" id="hero">
+    <!-- Decorative orbs -->
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-orb hero-orb-3"></div>
+    <!-- Grid overlay -->
+    <div class="hero-grid-overlay"></div>
+
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-event-badge">
+          <span class="dot"></span>
+          5ª Edizione — 18 Aprile 2026
+        </div>
+
+        <h1 class="hero-title">AVFX<br/>Festival</h1>
+
+        <p class="hero-subtitle">VFX &nbsp;|&nbsp; Virtual Production &nbsp;|&nbsp; Animation &nbsp;|&nbsp; AI</p>
+
+        <p class="hero-tagline">"Where digital worlds come to life"</p>
+        <p class="hero-desc">Festival degli Effetti Visivi e dell'Animazione CGI · 2026</p>
+
+        <div class="hero-meta">
+          <div class="hero-meta-item">
+            <!-- Calendar icon -->
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+              <path d="M16 2v4M8 2v4M3 10h18"/>
+            </svg>
+            Sabato 18 Aprile 2026, 09:00–20:00
+          </div>
+          <div class="hero-meta-item">
+            <!-- Location icon -->
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M12 2C8.1 2 5 5.1 5 9c0 5.3 7 13 7 13s7-7.7 7-13c0-3.9-3.1-7-7-7z"/>
+              <circle cx="12" cy="9" r="2.5"/>
+            </svg>
+            Nuovo Cinema Aquila, Roma
+          </div>
+          <div class="hero-meta-item">
+            <!-- Ticket icon -->
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M20 12V7a2 2 0 00-2-2H6a2 2 0 00-2 2v5"/>
+              <path d="M4 12a2 2 0 010 4v2a2 2 0 002 2h12a2 2 0 002-2v-2a2 2 0 010-4V12H4z"/>
+            </svg>
+            Ingresso gratuito
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <a
+            href="https://www.avfx.it/dettagli-e-registrazioni/festival-degli-effetti-visivi-e-dellanimazione-cgi"
+            target="_blank"
+            rel="noopener"
+            class="btn-primary"
+          >
+            Partecipa ora
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+          <a href="#speakers" class="btn-outline">
+            Scopri gli speaker
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       ABOUT — 3 COLONNE
+  ================================================ -->
+  <section class="about" id="about">
+    <div class="about-inner">
+      <div class="about-header fade-in">
+        <p class="section-label">Il Festival</p>
+        <h2 class="section-title" style="color: #1a1a2e;">Un festival unico nel suo genere</h2>
+        <p class="section-subtitle">
+          Tema 2026: <strong>"L'intelligenza umana all'epoca dell'AI"</strong> — l'intersezione tra genio umano e potenza algoritmica
+        </p>
+      </div>
+
+      <div class="about-grid">
+        <!-- Card 1 -->
+        <div class="about-card fade-in fade-in-delay-1">
+          <div class="about-card-icon">
+            <!-- Film icon -->
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <rect x="2" y="7" width="20" height="15" rx="2"/>
+              <path d="M16 3l-4 4-4-4M12 7V3"/>
+              <path d="M7 10v1M17 10v1M7 15v1M17 15v1"/>
+            </svg>
+          </div>
+          <h3>Un'esperienza immersiva</h3>
+          <p>
+            Workshop pratici su AI e Unreal Engine nelle pipeline VFX, proiezioni, dibattiti etici sul futuro della creatività digitale.
+            Presenta progetti di VFX, animazione CGI, VR, AR e gaming realizzati da professionisti del settore.
+          </p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="about-card fade-in fade-in-delay-2">
+          <div class="about-card-icon">
+            <!-- Globe icon -->
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/>
+            </svg>
+          </div>
+          <h3>Una community internazionale</h3>
+          <p>
+            Artisti italiani con carriere globali da DNeg, Weta FX e ILM. AVFX Student Award 2026 con 60+ opere da 10+ scuole italiane.
+            Job Fair e sessioni di mentorship per connettere le nuove generazioni con i maestri dell'industria.
+          </p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="about-card fade-in fade-in-delay-3">
+          <div class="about-card-icon">
+            <!-- Chip/CPU icon -->
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <rect x="7" y="7" width="10" height="10" rx="1"/>
+              <path d="M9 4v3M15 4v3M9 17v3M15 17v3M4 9h3M4 15h3M17 9h3M17 15h3"/>
+            </svg>
+          </div>
+          <h3>Innovazione tecnologica</h3>
+          <p>
+            Dove VFX, AI generativa, virtual production e animazione CGI si incontrano. Scopri come le nuove tecnologie
+            stanno rivoluzionando il ruolo dell'artista digitale — da strumento a co-creatore.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       FEATURED SPEAKERS
+  ================================================ -->
+  <section class="speakers" id="speakers">
+    <div class="speakers-inner">
+      <div class="speakers-header fade-in">
+        <p class="section-label">Featured Speakers</p>
+        <h2 class="section-title">I Protagonisti</h2>
+        <p class="section-subtitle">Incontra i migliori professionisti di VFX, AI e animazione</p>
+      </div>
+
+      <div class="speakers-grid">
+
+        <!-- Richard Baneham -->
+        <div class="speaker-card fade-in">
+          <div class="speaker-photo-wrap">
+            <div class="speaker-photo-placeholder">
+              <span class="initials">RB</span>
+            </div>
+            <span class="speaker-location-badge badge-red">LIVE FROM LA</span>
+          </div>
+          <div class="speaker-info">
+            <p class="speaker-name">Richard Baneham</p>
+            <p class="speaker-role">Senior VFX Supervisor</p>
+            <p class="speaker-company">Lightstorm Entertainment, NZ</p>
+            <div class="speaker-credits">
+              <span class="speaker-award">🏆 3× Oscar</span>
+              <span class="speaker-credit-tag">Avatar</span>
+            </div>
+            <span class="speaker-event-tag">18 Aprile · Roma</span>
+          </div>
+        </div>
+
+        <!-- Guido Quaroni -->
+        <div class="speaker-card fade-in fade-in-delay-1">
+          <div class="speaker-photo-wrap">
+            <div class="speaker-photo-placeholder">
+              <span class="initials">GQ</span>
+            </div>
+            <span class="speaker-location-badge badge-cyan">LIVE FROM SF</span>
+          </div>
+          <div class="speaker-info">
+            <p class="speaker-name">Guido Quaroni</p>
+            <p class="speaker-role">VP Technology</p>
+            <p class="speaker-company">Adobe (ex Pixar)</p>
+            <div class="speaker-credits">
+              <span class="speaker-credit-tag">Pixar</span>
+              <span class="speaker-credit-tag">Adobe</span>
+            </div>
+            <span class="speaker-event-tag">18 Aprile · Roma</span>
+          </div>
+        </div>
+
+        <!-- Paolo Emilio Selva -->
+        <div class="speaker-card fade-in fade-in-delay-2">
+          <div class="speaker-photo-wrap">
+            <div class="speaker-photo-placeholder">
+              <span class="initials">PS</span>
+            </div>
+            <span class="speaker-location-badge badge-green">LIVE FROM WLG</span>
+          </div>
+          <div class="speaker-info">
+            <p class="speaker-name">Paolo Emilio Selva</p>
+            <p class="speaker-role">Principal Engineer</p>
+            <p class="speaker-company">880Productions, NZ</p>
+            <div class="speaker-credits">
+              <span class="speaker-credit-tag">Wellington</span>
+            </div>
+            <span class="speaker-event-tag">18 Aprile · Roma</span>
+          </div>
+        </div>
+
+        <!-- Xavier Bernasconi -->
+        <div class="speaker-card fade-in">
+          <div class="speaker-photo-wrap">
+            <div class="speaker-photo-placeholder">
+              <span class="initials">XB</span>
+            </div>
+            <span class="speaker-location-badge badge-purple">LIVE IN ROME</span>
+          </div>
+          <div class="speaker-info">
+            <p class="speaker-name">Xavier Bernasconi</p>
+            <p class="speaker-role">Senior VFX Supervisor</p>
+            <p class="speaker-company">Belo FX</p>
+            <div class="speaker-credits">
+              <span class="speaker-credit-tag">Godzilla x Kong</span>
+              <span class="speaker-credit-tag">Furiosa</span>
+              <span class="speaker-award">VES Nom.</span>
+            </div>
+            <span class="speaker-event-tag">18 Aprile · Roma</span>
+          </div>
+        </div>
+
+        <!-- Francesco Gioia -->
+        <div class="speaker-card fade-in fade-in-delay-1">
+          <div class="speaker-photo-wrap">
+            <div class="speaker-photo-placeholder">
+              <span class="initials">FG</span>
+            </div>
+            <span class="speaker-location-badge badge-purple">LIVE IN ROME</span>
+          </div>
+          <div class="speaker-info">
+            <p class="speaker-name">Francesco Gioia</p>
+            <p class="speaker-role">Founder</p>
+            <p class="speaker-company">Moonshot CGI</p>
+            <div class="speaker-credits">
+              <span class="speaker-credit-tag">Marvel</span>
+              <span class="speaker-credit-tag">Netflix</span>
+              <span class="speaker-credit-tag">OpenAI</span>
+            </div>
+            <span class="speaker-event-tag">18 Aprile · Roma</span>
+          </div>
+        </div>
+
+        <!-- Diego Arciero -->
+        <div class="speaker-card fade-in fade-in-delay-2">
+          <div class="speaker-photo-wrap">
+            <div class="speaker-photo-placeholder">
+              <span class="initials">DA</span>
+            </div>
+            <span class="speaker-location-badge badge-purple">LIVE IN ROME</span>
+          </div>
+          <div class="speaker-info">
+            <p class="speaker-name">Diego Arciero</p>
+            <p class="speaker-role">VFX/AI Supervisor</p>
+            <p class="speaker-company">Autore "Le IA Generative"</p>
+            <div class="speaker-credits">
+              <span class="speaker-award">🏆 AVFX Award '25</span>
+            </div>
+            <span class="speaker-event-tag">18 Aprile · Roma</span>
+          </div>
+        </div>
+
+        <!-- Marco Romeo -->
+        <div class="speaker-card fade-in">
+          <div class="speaker-photo-wrap">
+            <div class="speaker-photo-placeholder">
+              <span class="initials">MR</span>
+            </div>
+            <span class="speaker-location-badge badge-purple">LIVE IN ROME</span>
+          </div>
+          <div class="speaker-info">
+            <p class="speaker-name">Marco Romeo</p>
+            <p class="speaker-role">Creative Technologist</p>
+            <p class="speaker-company">Founder, INBIBO</p>
+            <div class="speaker-credits">
+              <span class="speaker-credit-tag">Creative Tech</span>
+            </div>
+            <span class="speaker-event-tag">18 Aprile · Roma</span>
+          </div>
+        </div>
+
+        <!-- Michele Di Pasquale -->
+        <div class="speaker-card fade-in fade-in-delay-1">
+          <div class="speaker-photo-wrap">
+            <div class="speaker-photo-placeholder">
+              <span class="initials">MD</span>
+            </div>
+            <span class="speaker-location-badge badge-purple">LIVE IN ROME</span>
+          </div>
+          <div class="speaker-info">
+            <p class="speaker-name">Michele Di Pasquale</p>
+            <p class="speaker-role">AI Specialist</p>
+            <p class="speaker-company"></p>
+            <div class="speaker-credits">
+              <span class="speaker-credit-tag">Generative AI</span>
+            </div>
+            <span class="speaker-event-tag">18 Aprile · Roma</span>
+          </div>
+        </div>
+
+        <!-- Gigi Cavenago -->
+        <div class="speaker-card fade-in fade-in-delay-2">
+          <div class="speaker-photo-wrap">
+            <div class="speaker-photo-placeholder">
+              <span class="initials">GC</span>
+            </div>
+            <span class="speaker-location-badge badge-purple">LIVE IN ROME</span>
+          </div>
+          <div class="speaker-info">
+            <p class="speaker-name">Gigi Cavenago</p>
+            <p class="speaker-role">Visual Artist</p>
+            <p class="speaker-company"></p>
+            <div class="speaker-credits">
+              <span class="speaker-award">🏆 Emmy Award</span>
+            </div>
+            <span class="speaker-event-tag">18 Aprile · Roma</span>
+          </div>
+        </div>
+
+        <!-- Stefano Leoni -->
+        <div class="speaker-card fade-in">
+          <div class="speaker-photo-wrap">
+            <div class="speaker-photo-placeholder">
+              <span class="initials">SL</span>
+            </div>
+            <span class="speaker-location-badge badge-purple">LIVE IN ROME</span>
+          </div>
+          <div class="speaker-info">
+            <p class="speaker-name">Stefano Leoni</p>
+            <p class="speaker-role">VFX Supervisor & Founder</p>
+            <p class="speaker-company">EDI</p>
+            <div class="speaker-credits">
+              <span class="speaker-credit-tag">VFX</span>
+            </div>
+            <span class="speaker-event-tag">18 Aprile · Roma</span>
+          </div>
+        </div>
+
+        <!-- Fabio Cerrito -->
+        <div class="speaker-card fade-in fade-in-delay-1">
+          <div class="speaker-photo-wrap">
+            <div class="speaker-photo-placeholder">
+              <span class="initials">FC</span>
+            </div>
+            <span class="speaker-location-badge badge-purple">LIVE IN ROME</span>
+          </div>
+          <div class="speaker-info">
+            <p class="speaker-name">Fabio Cerrito</p>
+            <p class="speaker-role">VFX Supervisor</p>
+            <p class="speaker-company">Frame</p>
+            <div class="speaker-credits">
+              <span class="speaker-credit-tag">VFX</span>
+            </div>
+            <span class="speaker-event-tag">18 Aprile · Roma</span>
+          </div>
+        </div>
+
+        <!-- Giuseppe Squillaci -->
+        <div class="speaker-card fade-in fade-in-delay-2">
+          <div class="speaker-photo-wrap">
+            <div class="speaker-photo-placeholder">
+              <span class="initials">GS</span>
+            </div>
+            <span class="speaker-location-badge badge-purple">LIVE IN ROME</span>
+          </div>
+          <div class="speaker-info">
+            <p class="speaker-name">Giuseppe Squillaci</p>
+            <p class="speaker-role">Autore & VFX Supervisor</p>
+            <p class="speaker-company"></p>
+            <div class="speaker-credits">
+              <span class="speaker-credit-tag">VFX</span>
+            </div>
+            <span class="speaker-event-tag">18 Aprile · Roma</span>
+          </div>
+        </div>
+
+        <!-- Francesco Lupo -->
+        <div class="speaker-card fade-in">
+          <div class="speaker-photo-wrap">
+            <div class="speaker-photo-placeholder">
+              <span class="initials">FL</span>
+            </div>
+            <span class="speaker-location-badge badge-purple">LIVE IN ROME</span>
+          </div>
+          <div class="speaker-info">
+            <p class="speaker-name">Francesco Lupo</p>
+            <p class="speaker-role">Lead Groom Artist</p>
+            <p class="speaker-company">Framestore</p>
+            <div class="speaker-credits">
+              <span class="speaker-credit-tag">Framestore</span>
+            </div>
+            <span class="speaker-event-tag">18 Aprile · Roma</span>
+          </div>
+        </div>
+
+        <!-- Matteo Stirati -->
+        <div class="speaker-card fade-in fade-in-delay-1">
+          <div class="speaker-photo-wrap">
+            <div class="speaker-photo-placeholder">
+              <span class="initials">MS</span>
+            </div>
+            <span class="speaker-location-badge badge-green">LIVE FROM WLG</span>
+          </div>
+          <div class="speaker-info">
+            <p class="speaker-name">Matteo Stirati</p>
+            <p class="speaker-role">VFX Artist</p>
+            <p class="speaker-company">Weta FX, Wellington</p>
+            <div class="speaker-credits">
+              <span class="speaker-credit-tag">Weta FX</span>
+            </div>
+            <span class="speaker-event-tag">18 Aprile · Roma</span>
+          </div>
+        </div>
+
+        <!-- Christian Uva -->
+        <div class="speaker-card fade-in fade-in-delay-2">
+          <div class="speaker-photo-wrap">
+            <div class="speaker-photo-placeholder">
+              <span class="initials">CU</span>
+            </div>
+            <span class="speaker-location-badge badge-purple">LIVE IN ROME</span>
+          </div>
+          <div class="speaker-info">
+            <p class="speaker-name">Christian Uva</p>
+            <p class="speaker-role">Vice Presidente</p>
+            <p class="speaker-company">Roma Lazio Film Commission</p>
+            <div class="speaker-credits">
+              <span class="speaker-credit-tag">Istituzionale</span>
+            </div>
+            <span class="speaker-event-tag">18 Aprile · Roma</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       NEWSLETTER
+  ================================================ -->
+  <section class="newsletter" id="newsletter">
+    <div class="newsletter-inner fade-in">
+      <p class="section-label">Newsletter</p>
+      <h2>Iscriviti ora</h2>
+      <p>Ricevi aggiornamenti esclusivi, annunci speaker e novità sul festival direttamente nella tua inbox.</p>
+      <form class="newsletter-form" action="#" method="post" onsubmit="handleNewsletterSubmit(event)">
+        <input
+          type="email"
+          name="email"
+          placeholder="La tua email"
+          required
+          autocomplete="email"
+          aria-label="Indirizzo email"
+        />
+        <button type="submit">Iscriviti</button>
+      </form>
+      <p class="newsletter-note">Niente spam. Solo contenuti che contano. Puoi disiscriverti in qualsiasi momento.</p>
+    </div>
+  </section>
+
+  <!-- ================================================
+       FOOTER
+  ================================================ -->
+  <footer class="footer" id="contatti">
+    <div class="footer-inner">
+      <div class="footer-top">
+
+        <!-- Brand col -->
+        <div>
+          <div class="footer-logo">AVFX</div>
+          <p class="footer-tagline">
+            Festival degli Effetti Visivi e dell'Animazione CGI — 5ª Edizione.<br/>
+            Dove il genio umano incontra l'intelligenza artificiale.
+          </p>
+          <div class="footer-social">
+            <!-- Facebook -->
+            <a href="#" aria-label="Facebook" title="Facebook">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+            </a>
+            <!-- Instagram -->
+            <a href="#" aria-label="Instagram" title="Instagram">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+              </svg>
+            </a>
+            <!-- TikTok -->
+            <a href="#" aria-label="TikTok" title="TikTok">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+              </svg>
+            </a>
+            <!-- X (Twitter) -->
+            <a href="#" aria-label="X (Twitter)" title="X">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Info col -->
+        <div class="footer-col">
+          <h4>Il Festival</h4>
+          <a href="#about">Chi siamo</a>
+          <a href="#speakers">Speaker</a>
+          <a href="#newsletter">Newsletter</a>
+          <a
+            href="https://www.avfx.it/dettagli-e-registrazioni/festival-degli-effetti-visivi-e-dellanimazione-cgi"
+            target="_blank"
+            rel="noopener"
+          >Registrati</a>
+        </div>
+
+        <!-- Location col -->
+        <div class="footer-col">
+          <h4>Dove & Quando</h4>
+          <p>Sabato 18 Aprile 2026</p>
+          <p>09:00 – 20:00</p>
+          <p style="margin-top: 0.5rem;">Nuovo Cinema Aquila</p>
+          <p>Via L'Aquila 66/74</p>
+          <p>00176 Roma (Pigneto)</p>
+          <p style="margin-top: 0.5rem; color: #10B981;">Ingresso gratuito</p>
+        </div>
+
+        <!-- Contatti col -->
+        <div class="footer-col">
+          <h4>Contatti</h4>
+          <a href="mailto:info@avfxfestival.com">info@avfxfestival.com</a>
+          <p style="margin-top: 0.75rem; font-size: 0.8rem;">Per partnership, press e accrediti media contattaci via email.</p>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 AVFX Festival. All rights reserved.</p>
+        <p class="footer-credits">Festival degli Effetti Visivi e dell'Animazione CGI — 5ª Edizione</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================================================
+       JAVASCRIPT — Scroll animations + Newsletter
+  ================================================ -->
+  <script>
+    // Intersection Observer per fade-in al scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Newsletter submit
+    function handleNewsletterSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      const btn = form.querySelector('button');
+      const email = form.querySelector('input[type="email"]').value;
+      btn.textContent = '✓ Iscritto!';
+      btn.style.background = '#10B981';
+      form.querySelector('input').value = '';
+      setTimeout(() => {
+        btn.textContent = 'Iscriviti';
+        btn.style.background = '';
+      }, 3000);
+    }
+
+    // Nav scroll effect
+    const nav = document.querySelector('.nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 80) {
+        nav.style.background = 'rgba(10, 10, 26, 0.98)';
+      } else {
+        nav.style.background = 'rgba(10, 10, 26, 0.92)';
+      }
+    });
+  </script>
+
 </body>
 </html>
