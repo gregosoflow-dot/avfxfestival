@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+  <rect width="300" height="300" fill="#1a1a3e"/>
+  <circle cx="150" cy="150" r="140" fill="none" stroke="#6B21A8" stroke-width="2" opacity="0.5"/>
+  <text x="150" y="175" font-family="Inter, system-ui, sans-serif" font-size="90" font-weight="700" fill="#7C3AED" text-anchor="middle" opacity="0.9">LA</text>
+</svg>
