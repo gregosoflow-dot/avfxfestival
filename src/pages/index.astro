@@ -732,6 +732,42 @@
     }
 
     /* ============================================
+       SPEAKER CAPTION TOGGLE (test - Richard Baneham)
+    ============================================ */
+    .speaker-caption-toggle {
+      background: transparent;
+      border: 1px solid var(--accent-magenta, #e040fb);
+      color: var(--accent-magenta, #e040fb);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+    .speaker-caption-toggle:hover {
+      background: var(--accent-magenta, #e040fb);
+      color: white;
+    }
+    .speaker-caption {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+      padding: 0;
+      font-size: 0.85rem;
+      color: var(--text-gray, #aaa);
+      line-height: 1.5;
+    }
+    .speaker-caption.open {
+      max-height: 300px;
+      padding: 10px 0;
+    }
+    .speaker-caption p {
+      margin: 0 0 0.5em;
+    }
+
+    /* ============================================
        NEWSLETTER
     ============================================ */
     .newsletter {
@@ -1194,6 +1230,13 @@
               <span class="speaker-credit-tag">Avatar</span>
             </div>
             <span class="speaker-event-tag">18 Aprile · Roma</span>
+            <button class="speaker-caption-toggle" onclick="this.parentElement.querySelector('.speaker-caption').classList.toggle('open'); this.textContent = this.textContent === 'Scopri di più' ? 'Chiudi' : 'Scopri di più'">Scopri di più</button>
+            <div class="speaker-caption">
+              <p>👉 Da Hollywood a Roma: il cuore di Avatar</p>
+              <p>Tre volte Premio Oscar (ultimo nel 2026 per Avatar: Fire and Ash) e vincitore di un BAFTA Award, Richard Baneham è tra i più grandi innovatori dei VFX.</p>
+              <p>Pioniere della Performance Capture, ha ridefinito il modo in cui gli attori diventano personaggi digitali.</p>
+              <p>📡 In collegamento da Los Angeles<br>📅 18 Aprile – Roma<br>🎟️ Un'occasione irripetibile</p>
+            </div>
           </div>
         </div>
 
