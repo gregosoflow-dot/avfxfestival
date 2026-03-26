@@ -1081,11 +1081,107 @@
     @media (max-width: 1023px) {
       .nav-links {
         display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        background: rgba(10, 10, 26, 0.98);
+        border-bottom: 1px solid rgba(107, 33, 168, 0.4);
+        padding: 1.5rem;
+        gap: 1.2rem;
+      }
+
+      .nav-links.nav-open {
+        display: flex;
       }
 
       .nav-hamburger {
         display: flex;
       }
+
+      .nav-hamburger.nav-open span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+      .nav-hamburger.nav-open span:nth-child(2) {
+        opacity: 0;
+      }
+      .nav-hamburger.nav-open span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+    }
+
+    /* ============================================
+       COUNTDOWN
+    ============================================ */
+    .hero-countdown {
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-countdown-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+      margin-bottom: 1rem;
+      opacity: 0.9;
+    }
+
+    .countdown-blocks {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .countdown-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: rgba(107, 33, 168, 0.2);
+      border: 1px solid rgba(217, 70, 239, 0.3);
+      border-radius: 12px;
+      padding: 0.75rem 1.1rem;
+      min-width: 72px;
+    }
+
+    .countdown-value {
+      font-size: clamp(1.6rem, 5vw, 2.4rem);
+      font-weight: 900;
+      line-height: 1;
+      background: linear-gradient(135deg, #ffffff, var(--accent-magenta));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .countdown-unit {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-gray);
+      margin-top: 0.25rem;
+    }
+
+    .countdown-sep {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: rgba(217, 70, 239, 0.5);
+      align-self: flex-start;
+      padding-top: 0.6rem;
+    }
+
+    .countdown-expired {
+      font-size: clamp(1.2rem, 4vw, 1.8rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-magenta));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
   </style>
 </head>
@@ -1173,6 +1269,32 @@
               <path d="M4 12a2 2 0 010 4v2a2 2 0 002 2h12a2 2 0 002-2v-2a2 2 0 010-4V12H4z"/>
             </svg>
             Ingresso gratuito
+          </div>
+        </div>
+
+        <!-- COUNTDOWN -->
+        <div class="hero-countdown" id="hero-countdown">
+          <p class="hero-countdown-label">Mancano solo:</p>
+          <div class="countdown-blocks" id="countdown-blocks">
+            <div class="countdown-block">
+              <span class="countdown-value" id="cd-days">--</span>
+              <span class="countdown-unit">giorni</span>
+            </div>
+            <span class="countdown-sep">:</span>
+            <div class="countdown-block">
+              <span class="countdown-value" id="cd-hours">--</span>
+              <span class="countdown-unit">ore</span>
+            </div>
+            <span class="countdown-sep">:</span>
+            <div class="countdown-block">
+              <span class="countdown-value" id="cd-minutes">--</span>
+              <span class="countdown-unit">minuti</span>
+            </div>
+            <span class="countdown-sep">:</span>
+            <div class="countdown-block">
+              <span class="countdown-value" id="cd-seconds">--</span>
+              <span class="countdown-unit">secondi</span>
+            </div>
           </div>
         </div>
 
@@ -1270,7 +1392,7 @@
       <div class="speakers-header fade-in">
         <p class="section-label">Featured Speakers</p>
         <h2 class="section-title">I Protagonisti</h2>
-        <p class="section-subtitle">48 professionisti di VFX, AI, animazione e virtual production</p>
+        <p class="section-subtitle">oltre 50 professionisti di VFX, AI, animazione e virtual production</p>
       </div>
 
       <div class="speakers-grid">
@@ -2934,6 +3056,66 @@
         nav.style.background = 'rgba(10, 10, 26, 0.92)';
       }
     });
+
+    // ── HAMBURGER FIX ──────────────────────────────
+    const hamburger = document.querySelector('.nav-hamburger');
+    const navLinks  = document.querySelector('.nav-links');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('nav-open');
+      hamburger.classList.toggle('nav-open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    // Chiudi menu mobile quando si clicca un link
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('nav-open');
+        hamburger.classList.remove('nav-open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // ── COUNTDOWN ──────────────────────────────────
+    (function initCountdown() {
+      const target = new Date('2026-04-18T00:00:00');
+
+      const elDays    = document.getElementById('cd-days');
+      const elHours   = document.getElementById('cd-hours');
+      const elMinutes = document.getElementById('cd-minutes');
+      const elSeconds = document.getElementById('cd-seconds');
+      const elBlocks  = document.getElementById('countdown-blocks');
+      const elLabel   = document.querySelector('.hero-countdown-label');
+
+      function pad(n) { return String(n).padStart(2, '0'); }
+
+      function tick() {
+        const now  = new Date();
+        const diff = target - now;
+
+        if (diff <= 0) {
+          // Scaduto — mostra messaggio festivo
+          elLabel.textContent = '';
+          elBlocks.innerHTML = '<p class="countdown-expired">È oggi! 🎬</p>';
+          return; // stop
+        }
+
+        const totalSec = Math.floor(diff / 1000);
+        const days    = Math.floor(totalSec / 86400);
+        const hours   = Math.floor((totalSec % 86400) / 3600);
+        const minutes = Math.floor((totalSec % 3600) / 60);
+        const seconds = totalSec % 60;
+
+        elDays.textContent    = pad(days);
+        elHours.textContent   = pad(hours);
+        elMinutes.textContent = pad(minutes);
+        elSeconds.textContent = pad(seconds);
+
+        setTimeout(tick, 1000);
+      }
+
+      tick();
+    })();
   </script>
 
 </body>
